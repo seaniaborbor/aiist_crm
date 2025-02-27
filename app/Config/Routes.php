@@ -20,12 +20,21 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
     $routes->post("add_users", 'Admin\UsersController::add_user');
     $routes->get("user_profile/(:num)", 'Admin\UsersController::user_profile/$1');
     $routes->post("user_profile/(:num)", 'Admin\UsersController::user_profile/$1');
+    $routes->post("edit_user_profile", 'Admin\UsersController::edit_user_profile');
+
+
+    $routes->get("admins_filters/(:any)", 'Admin\UsersController::admins_filters/$1');
     $routes->post("personal_profile/(:num)", 'Admin\DashboardController::personal_profile/$1');
     $routes->get("personal_profile/(:num)", 'Admin\DashboardController::personal_profile/$1');
 
 
+
     //marketing manager
     $routes->get('marketing_manager', 'Admin\MarketingManagerController::index');
+
+    $routes->get('enrollment_log', 'Admin\EnrollmentController::index');
+    $routes->get('stud_profile/(:num)', 'Admin\EnrollmentController::stud_profile/$1');
+
 
 
 });
@@ -56,8 +65,20 @@ $routes->group('marketing', ['filter' => 'contactlogger'], function($routes) {
     $routes->post("personal_profile/(:num)", 'Marketing\DashboardController::personal_profile/$1');
     $routes->get("personal_profile/(:num)", 'Marketing\DashboardController::personal_profile/$1');
 
-    
-
 
 });
 
+$routes->group('enrollment', ['filter' => 'enrollmentProtector'], function($routes) {
+
+    $routes->get('', 'Enrollment\DashboardController::index');
+    $routes->get('enroll', 'Enrollment\EnrollmentController::index');
+    $routes->post('enroll', 'Enrollment\EnrollmentController::index');
+    $routes->get('stud_profile/(:num)', 'Enrollment\EnrollmentController::stud_profile/$1');
+    $routes->post("upload_student_profile", 'Enrollment\EnrollmentController::upload_student_profile');
+
+    $routes->post("personal_profile/(:num)", 'Enrollment\DashboardController::personal_profile/$1');
+    $routes->get("personal_profile/(:num)", 'Enrollment\DashboardController::personal_profile/$1');
+    $routes->post("change_enroll_ment_status/(:num)", 'Enrollment\EnrollmentController::change_enroll_ment_status/$1');
+
+
+});

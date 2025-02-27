@@ -1,28 +1,29 @@
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-  <strong>Important Notice:</strong> You are only allowed to update your name and password. Please be cautious when updating your password as it cannot be reset by any means unless with the help of the system administrator.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
 <form action="/admin/personal_profile/<?=$user['userId']?>" method="post">
-    <div class="form-group">
-        <label for="userName">User Full Name</label>
-        <input type="text" value="<?=$user['userName']?>" name="userName" id="userName" class="form-control form-control-lg">
-        <!-- Add validation error message here -->
-            <?php if(isset($validation) && $validation->hasError('userName')): ?>
-            <p class="text-danger"><?= $validation->getError('userName') ?></p>
-        <?php endif; ?>
+    
+    <div class="row">
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="userName">User Full Name</label>
+            <input type="text" value="<?=$user['userName']?>" name="userName" id="userName" class="form-control form-control-lg">
+            <!-- Add validation error message here -->
+                <?php if(isset($validation) && $validation->hasError('userName')): ?>
+                <p class="text-danger"><?= $validation->getError('userName') ?></p>
+            <?php endif; ?>
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="userEmail">User Email</label>
+                <input type="email" value="<?=$user['userEmail']?>" disabled  id="userEmail" class="form-control form-control-lg">
+                <!-- Add validation error message here -->
+                    <?php if(isset($validation) && $validation->hasError('userEmail')): ?>
+                    <p class="text-danger"><?= $validation->getError('userEmail') ?></p>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
     
-    <div class="form-group">
-        <label for="userEmail">User Email</label>
-        <input type="email" value="<?=$user['userEmail']?>" disabled  id="userEmail" class="form-control form-control-lg">
-        <!-- Add validation error message here -->
-            <?php if(isset($validation) && $validation->hasError('userEmail')): ?>
-            <p class="text-danger"><?= $validation->getError('userEmail') ?></p>
-        <?php endif; ?>
-    </div>
 
         <div class="form-group">
             <label for="userPassword">Your Current Password</label>
@@ -44,6 +45,11 @@
 
 
     <div class="form-group">
-        <input type="submit" value="Update Account" class="btn btn-primary">
+    <button type="submit" class="btn mt-3  p-0  btn-danger btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-file"></i>
+        </span>
+        <span class="text">Save Changes </span>
+    </button>
     </div>
     </form>

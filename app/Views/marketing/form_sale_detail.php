@@ -70,10 +70,15 @@
                 <i class="fas fa-cog"></i>
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?=$formSale['formSaleId']?>/Pending">Enrollment Pending </a>
-                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?=$formSale['formSaleId']?>/Enrolled">Enrolled</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/Pending">Pending</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/Contacted">Contacted</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/Enrolled">Enrolled</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/No%20Longer%20Has%20Interest">No Longer Has Interest</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/Uncontactable">Uncontactable</a>
+                <a class="dropdown-item" href="/marketing/log_form_sale/change_status/<?= $formSale['formSaleId'] ?>/No%20Finance">No Finance</a>
             </div>
         </div>
+
         
         <!-- back button -->
         <a href="/marketing" class="btn btn-sm btn-secondary btn-icon-split">
@@ -90,9 +95,9 @@
 
 <!-- edit modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content border-bottom-danger">
+            <div class="modal-header alert alert-danger boder-bottom-danger">
                 <h5 class="modal-title" id="editModalLabel">Edit Lead</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

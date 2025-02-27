@@ -2,16 +2,6 @@
 include "online_inquiry_graph.php"; 
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Important Notice:</strong> Below is a detailed table showcasing the logs of all online inquiries. The table contains information such as lead names, contact details, inquiry status, and more. Use this data for review and analysis.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-</div>
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped" id="table0" width="100%" cellspacing="0">

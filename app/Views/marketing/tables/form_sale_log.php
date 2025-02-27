@@ -27,7 +27,7 @@ function timeElapsed($timestamp) {
 
 ?>
 <div class="table-responsive">
-    <table id="table1" class="table table-striped table-bordered table-hover table-sm align-middle">
+    <table id="table0" class="table table-striped table-bordered table-hover table-sm align-middle">
         <thead class="table-light">
             <tr>
                 <th class="w-25">Prospective Name</th>

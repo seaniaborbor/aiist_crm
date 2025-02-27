@@ -1,26 +1,40 @@
-<div class="table-responsive">
-<table class="table table-striped" id="table2" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Login In User Name</th>
-            <th>Email</th>
-            <th>Login Time</th>
-            <th>Detail</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($user_login_log as $log): ?>
-        <tr>
-            <td><?= $log['userName']; ?></td>
-            <td><?= $log['userEmail']; ?></td>
-            <td><?= $log['loginInTime']; ?></td>
-            <td>
-                <a href="/admin/user_profile/<?=$log['userId']?>" class="btn btn-primary btn-sm btn-block my-0">
-                    <i class="fas fa-user"></i> View Profile
+<div class="card shadow-lg border-bottom-primary" style="border-radius: 25px; overflow: hidden;">
+<div class="card-body bg-white ">
+    <center>
+        <h6 class="mb-0 text-primary fw-bold">Recent Logins</h6>
+        <hr class="border-bottom-primary">
+    </center>
+    <?php foreach ($user_login_log as $log): ?>
+        <div class="row border-bottom py-3 align-items-center">
+            <!-- Profile Picture -->
+            <div class="col-3 text-center">
+            <img src="<?= !empty($log->userPic) ? '/dashboard_assets/img/' . esc($log->userPic) : '/dashboard_assets/img/ediusers.jpg' ?>" 
+     class="rounded-circle img-fluid shadow-lg img-thumbnail" 
+     alt="Profile Picture" 
+     style="width: 60px; height: 60px; object-fit: cover;">
+
+            </div>
+            <!-- User Details -->
+            <div class="col-6">
+                <h6 class="mb-1 text-primary"><?= esc($log->userName); ?></h6>
+                <small class="text-muted"><?= esc(date("M j, Y g:i A", strtotime($log->loginInTime)) ?? 'No Course'); ?></small>
+            </div>
+            <!-- Profile Button -->
+            <div class="col-3 text-center">
+                <a href="/admin/user_profile/<?=esc($log->userId)?>" class="btn btn-outline-primary rounded-pill btn-sm">
+                <i class="fas fa-eye"></i>
                 </a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+    <center>
+    <a href="/admin/users" class="btn mt-3 rounded-pill p-0 btn-sm btn-primary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-users"></i>
+        </span>
+        <span class="text">View All Users</span>
+    </a>
+    </center>
+</div>
 </div>

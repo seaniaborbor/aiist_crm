@@ -17,7 +17,10 @@
     <link href="/dashboard_assets/css/login_style.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body style="
+  background-image: url('https://i.pinimg.com/736x/b1/8d/06/b18d06af07b77d55c266fb3a769317c3.jpg');
+  background-size: cover; 
+  background-position: left;">
     <div class="container-fluid">
       <div class="container">
         <div class="row">

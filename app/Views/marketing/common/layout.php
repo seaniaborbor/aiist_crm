@@ -26,32 +26,16 @@
        <script src="/dashboard_assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/dashboard_assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+     <!-- Include DataTables and Buttons extensions CSS and JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+
     <style>
-/* Align the pagination to the right */
-.dataTables_wrapper .dataTables_paginate {
-    float: right;
-    margin-top: 10px;
-}
 
-/* Fix the search bar alignment */
-.dataTables_wrapper .dataTables_filter {
-    float: left !important; /* Align the search bar to the left */
-    margin-top: 10px;
-}
 
-/* Adjust the search input */
-.dataTables_wrapper .table1_filter input {
-   float: left;
-    
-}
-
-/* Ensure the search bar and entries dropdown are aligned */
-.dataTables_wrapper .dataTables_filter,
-.dataTables_wrapper .dataTables_length {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+h1{
+    font-family: "Comic Sans MS" !important;
 }
 </style>
 
@@ -147,7 +131,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=session()->get('userName')?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="/dashboard_assets/img/undraw_profile.svg">
+                                    src="/dashboard_assets/img/<?=session()->get('userPic')?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -207,35 +191,53 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header alert alert-danger">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body text-danger">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-danger" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" href="/logout">Logout</a>
+                    <a href="/logout" class="btn p-0 btn-sm btn-success btn-icon-split" >
+                        <span class="icon text-white-50">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <span class="text">Yes, Log Me Out</span>
+                    </a>
+                    <a href="#" class="btn p-0 btn-sm btn-danger btn-icon-split" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <span class="text">Cancel</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-
+  
     <?php if(session()->getFlashdata('success')): ?>
     <div class="modal fade show" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button class="btn btn-lg mb-4 btn-success rounded-circle">
-                        <i class="fas fa-check"></i>
-                    </button>
+            <div class="modal-content pb-0">
+                <div class="modal-header d-flex justify-content-around bg-success text-white p-0 ">
+                   <img class="img-fluid" src="/dashboard_assets/img/success_icon.png" alt="">
+                </div>
+                <div class="modal-body text-dark text-center m-0  pb-0">
                     <h4 class="text-success">
-                        <?= session()->getFlashdata('success') ?>
+                        Success
                     </h4>
-                    <button type="button" class="btn btn-success mt-4" data-dismiss="modal">Dismiss</button>
-
+                    <p class="leaad">
+                    <?= session()->getFlashdata('success') ?>
+                    </p>
+                    
+                    <button  type="button" class="btn my-4 p-0 btn-danger btn-icon-split"  data-dismiss="modal" >
+                    <span class="icon text-white-50">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    <span class="text">Dismiss </span>
+                </button>
                 </div>
             </div>
         </div>
@@ -246,17 +248,20 @@
     <div class="modal fade show" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header p-0">                    
+                    <img class="img-fluid" src="/dashboard_assets/img/error_icon.jpg" alt="">
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
+                    <h3 class="text-danger" >An Error Occured</h3>
+                    <p class="lead">
                     <?= session()->getFlashdata('error') ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </p>
+                    <button  type="button" class="btn my-4 p-0 btn-danger btn-icon-split"  data-dismiss="modal" >
+                    <span class="icon text-white-50">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    <span class="text">Dismiss </span>
+                </button>
                 </div>
             </div>
         </div>
@@ -274,18 +279,46 @@
     <!-- Custom scripts for all pages-->
     <script src="/dashboard_assets/js/sb-admin-2.min.js"></script>
 
+ 
        <!-- Page level plugins -->
        <script src="/dashboard_assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/dashboard_assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+      <!-- Page level plugins -->
+      <script src="/dashboard_assets/vendor/datatables/jquery.dataTables.min.js"></script>
+  
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#table1').DataTable();
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#table2').DataTable();
+
+    <script>
+    $(document).ready(function () {
+        // Configure DataTable with export and print buttons for table2
+        $('#table2').DataTable({
+            dom: 'Bfrtip', // Add the buttons to the DataTable
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+        // Configure DataTable with export and print buttons for table0
+        $('#table0').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+        // Configure DataTable with export and print buttons for table3
+        $('#table3').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
     });
 </script>
 

@@ -2,14 +2,6 @@
 include "form_sale_graph.php";
 ?>
 
-<div class="alert alert-primary alert-dismissible fade show" role="alert">
-  <strong>Important Notice:</strong> Below, you will find a detailed log of all forms sold and their corresponding records as logged in the database. Review the information for accuracy and completeness.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-
 <div class="table-responsive">
     <table id="table2" class="table table-striped table-bordered" style="width: 100%;">
         <thead>

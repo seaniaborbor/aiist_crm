@@ -72,7 +72,14 @@ class Home extends BaseController
 
                                 // Redirect to the admin dashboard
                                 return redirect()->to('/admin');
-                            } else {
+                            } elseif($user['userAccessType'] === 'enrollment'){
+                                if($newLog->save([
+                                    'userRealId' => $user['userId'],
+                                ]));
+
+                                // Redirect to the admin dashboard
+                                return redirect()->to('/enrollment');
+                            } else{
                                 if($newLog->save([
                                     'userRealId' => $user['userId'],
                                 ]));

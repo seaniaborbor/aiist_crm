@@ -1,5 +1,7 @@
 <form method="post" action="/marketing/log_form_sale/details/<?=$formSale['formSaleId']?>">
-    <div class="form-group">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveFullName">Full Name</label>
         <input type="text" 
                class="form-control <?= isset($errors['prospectiveFullName']) ? 'is-invalid' : '' ?>" 
@@ -10,8 +12,10 @@
         <?php if (isset($errors['prospectiveFullName'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveFullName']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveContact1">Contact 1</label>
         <input type="text" 
                class="form-control <?= isset($errors['prospectiveContact1']) ? 'is-invalid' : '' ?>" 
@@ -22,8 +26,10 @@
         <?php if (isset($errors['prospectiveContact1'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveContact1']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveContact2">Contact 2</label>
         <input type="text" 
                class="form-control <?= isset($errors['prospectiveContact2']) ? 'is-invalid' : '' ?>" 
@@ -33,8 +39,10 @@
         <?php if (isset($errors['prospectiveContact2'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveContact2']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveWhatAppContact">WhatsApp Contact</label>
         <input type="text" 
                class="form-control <?= isset($errors['prospectiveWhatAppContact']) ? 'is-invalid' : '' ?>" 
@@ -44,8 +52,10 @@
         <?php if (isset($errors['prospectiveWhatAppContact'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveWhatAppContact']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveAddress">Address</label>
         <input type="text" 
                class="form-control <?= isset($errors['prospectiveAddress']) ? 'is-invalid' : '' ?>" 
@@ -56,8 +66,10 @@
         <?php if (isset($errors['prospectiveAddress'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveAddress']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prspectiveFormPurchase">Form Purchase</label>
         <select class="form-control <?= isset($errors['prspectiveFormPurchase']) ? 'is-invalid' : '' ?>" 
                 id="prspectiveFormPurchase" 
@@ -69,8 +81,10 @@
         <?php if (isset($errors['prspectiveFormPurchase'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prspectiveFormPurchase']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveInvoiceNum">Invoice Number</label>
         <input type="number" 
                class="form-control <?= isset($errors['prospectiveInvoiceNum']) ? 'is-invalid' : '' ?>" 
@@ -81,8 +95,10 @@
         <?php if (isset($errors['prospectiveInvoiceNum'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveInvoiceNum']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
         <label for="prospectiveFormNo">Form Number</label>
         <input type="number" 
                class="form-control <?= isset($errors['prospectiveFormNo']) ? 'is-invalid' : '' ?>" 
@@ -93,6 +109,13 @@
         <?php if (isset($errors['prospectiveFormNo'])): ?>
             <div class="invalid-feedback"><?= esc($errors['prospectiveFormNo']) ?></div>
         <?php endif; ?>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <button type="submit" class="btn mt-3  p-0  btn-danger btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-file"></i>
+        </span>
+        <span class="text">Update Record  </span>
+    </button>
 </form>

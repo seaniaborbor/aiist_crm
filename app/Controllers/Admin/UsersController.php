@@ -20,10 +20,6 @@ class UsersController extends BaseController
             ->groupBy('userAccessType')
             ->findAll();
         
-        $data['userCountByStatus'] = $this->userModel->select('userStatus, COUNT(*) as count')
-            ->groupBy('userStatus')
-            ->findAll();
-
 
         return view('admin/user_pages/users', $data);
     }
@@ -169,5 +165,81 @@ class UsersController extends BaseController
         }
 
         return view('admin/user_pages/user_profile', $data);
+    }
+
+    // this will list all admin for a particular department 
+    public function admins_filters($department_name){
+        $data = [];
+
+        $data['users'] = $this->userModel->where('userAccessType', $department_name)
+            ->orderBy("users.userId")
+            ->paginate(10);
+
+        $data['pager'] = $this->userModel->pager;
+
+        return view("admin/user_pages/department_users", $data);
+    }
+
+    // this will updaate the profile of an adin user 
+
+    public function edit_user_profile(){
+
+        $rules = [
+            'userPic' => [
+                'rules' => 'uploaded[userPic]|is_image[userPic]|mime_in[userPic,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Profile image is required.',
+                    'is_image' => 'Profile image must be a valid image file.',
+                    'mime_in' => 'Profile image must be a jpg, jpeg, or png file.'
+                ]
+            ],
+            'userId' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Student ID is required.',
+                    'numeric' => 'Student ID must be a number.'
+                ]
+            ]
+        ];
+
+        if ($this->request->getMethod() == "post") {
+            if (!$this->validate($rules)) {
+                return redirect()->back()->with("error", "Either a valid image isn't selected or you left the field blank.");
+            } else {
+                // Handle the file upload and other logic here
+                $img = $this->request->getFile('userPic');
+                if ($img->isValid() && !$img->hasMoved()) {
+                    $newName = $img->getRandomName();
+                
+                    if ($img->move(FCPATH . 'dashboard_assets/img/', $newName)) {
+                        $userId = $this->request->getPost('userId');
+
+                        $profileData = $this->userModel->find($userId);
+                    
+                        $profileData['userPic'] = $newName;
+                    
+                        // Check if the user record exists
+                        if ($this->userModel->where("userId", $userId)->first()) {
+                            // Update query should be done using 'set' and 'where'
+                            if ($this->userModel->set($profileData)->where("userId", $userId)->update()) {
+                                return redirect()->back()->with("success", "You updated the profile image successfully.");
+                            } else {
+                                return redirect()->back()->with("error", "Failed to update profile picture.");
+                            }
+                        } else {
+                            return redirect()->back()->with("error", "Failed to save image data.");
+                        }
+                    } else {
+                        return redirect()->back()->with("error", "Failed to move uploaded file.");
+                    }
+                    
+                } else {
+                    return redirect()->back()->with("error", "Invalid image file.");
+                }
+                
+            }
+        }
+
+        return redirect()->back()->with("error", "You wrongly visited this route");
     }
 }

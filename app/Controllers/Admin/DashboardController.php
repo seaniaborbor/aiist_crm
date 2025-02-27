@@ -6,6 +6,7 @@ use App\Models\LogTracker;
 use App\Models\Admin\UsersModel;
 use App\Models\Marketing\OnlineInquiryModel;
 use App\Models\Marketing\FormSaleModel;
+use App\Models\Enrollment\EnrollmentModel;
 
 class DashboardController extends BaseController
 {
@@ -15,26 +16,34 @@ class DashboardController extends BaseController
 
         $logTrackerModel = new LogTracker();
         $userModel = new UsersModel();
-
-        $data['user_login_log'] = $logTrackerModel->join('users', 'users.userId = userloginlog.userRealId')->findAll();
-
-        $data['top_five_login_users'] = $logTrackerModel
-            ->select('users.userName, COUNT(userloginlog.userRealId) as login_count')
-            ->join('users', 'users.userId = userloginlog.userRealId')
-            ->groupBy('userloginlog.userRealId')
-            ->orderBy('login_count', 'DESC')
-            ->limit(5)
-            ->findAll();
-
-        $data['total_users'] = $logTrackerModel->db->table('users')->countAllResults();
-
         $onlineInquiryModel = new OnlineInquiryModel();
-        $data['total_online_inquiries'] = $onlineInquiryModel->countAllResults();
-
         $formSaleModel = new FormSaleModel();
-        $data['total_form_sales'] = $formSaleModel->countAllResults();
+        $enrollment_db = new EnrollmentModel();
 
-        
+       
+        $total_users = $logTrackerModel->db->table('users')->countAllResults();
+        $total_online_inquiries = $onlineInquiryModel->countAllResults();
+        $total_form_sales = $formSaleModel->countAllResults();
+        $total_enrollment = $enrollment_db->countAllResults();
+
+        $data['counters'] = [
+            "Total Admin" => $total_users,
+            "Total Lead" => $total_online_inquiries,
+            "Total Form Sold" => $total_form_sales,
+            "Total Enrollment" => $total_form_sales,
+        ];
+
+        $data['user_login_log'] = $logTrackerModel->table('userloginlog')
+        ->select('users.userId, users.userPic, users.userName, MAX(userloginlog.loginInTime) as loginInTime')
+        ->join('users', 'users.userId = userloginlog.userRealId')  // Join with users table
+        ->groupBy('users.userId')  // Ensure unique users
+        ->orderBy('loginInTime', 'DESC')  // Get the latest logins
+        ->limit(5)  // Limit to last 5 unique users
+        ->get()
+        ->getResult();
+    
+
+        $data['enrollment_log'] = $enrollment_db->findAll();  
 
         return view('admin/dashboard', $data);
     }

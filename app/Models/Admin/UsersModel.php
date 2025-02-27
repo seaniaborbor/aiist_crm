@@ -17,6 +17,7 @@ class UsersModel extends Model
         'userAccesstype',
         'userStatus',
         'userCreatedLoggedBy',
+        'userPic'
     ];
 
      // Enable automatic timestamps

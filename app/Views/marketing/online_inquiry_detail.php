@@ -62,9 +62,16 @@
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Contacted">Contacted</a>
                 <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Inquirey Closed">Inquiry Closed</a>
+                <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Has Purchased Form">Has Purchased Form</a>
+                <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Enrolled">Enrolled</a>
+                <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/No Course of Interest">No Course of Interest</a>
+                <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Unreacheable">Unreacheable</a>
+                <a class="dropdown-item" href="/marketing/online_inquiry/change_status/<?=$lead['onlineInquiryId']?>/Inquirey Closed">Inquiry Closed</a>
             </div>
         </div>
-        
+                                                                                                                            
+                                                                                                                            
+                                                                                                                    
         <!-- back button -->
         <a href="/marketing/log_online_inquiry_form" class="btn btn-sm btn-secondary btn-icon-split">
             <span class="icon text-white-50">
@@ -80,9 +87,9 @@
 
 <!-- edit modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content border-bottom-danger">
+            <div class="modal-header alert alert-danger border-bottom-danger">
                 <h5 class="modal-title" id="editModalLabel">Edit Lead</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

@@ -26,6 +26,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'admin' => \App\Filters\AdminProtector::class,
         'contactlogger' => \App\Filters\MarketingProtector::class,
+        'enrollmentProtector' => \App\Filters\EnrollmentFilter::class,
     ];
 
     /**
